@@ -1,19 +1,28 @@
+/// <reference types="cypress"/>
 describe('US-012–Funcionalidade: Cadastro de membros', () => {
+  
+  beforeEach(() => {
+    cy.visit('/')
+  });
+
   it('Deve fazer o cadastro de campos obrigatórios', () => {
-    cy.visit('http://127.0.0.1:8080/')
-
-    const randomEmail = `fabio_${Date.now()}@testes.com`;
-
-    cy.get('#signup-firstname').type('Fábio')
-    cy.get('#signup-lastname').type('Araujo')
-    cy.get('#signup-email').type(randomEmail)
-    cy.get('#signup-phone').type('119832989832')
-    cy.get('#signup-password').type('Teste&2020')
-    cy.get('#signup-button').click()
-
+    var email = `fabio${Date.now()}@teste.com`
+    cy.preencherCadastro( 'fabio' , 'Araujo', email, '8596352145','Teste@12345'  )
     cy.get('#signup-response').should('contain', 'Cadastro realizado com sucesso!')
   })
+
+it('Deve validar mensagem de erro com o campo nome inválido', () => {
+  cy.preencherCadastro( 'Fabio20' , 'Araujo', 'fabio@teste.com', '8596352145','Teste@12345' )
+  cy.get('#signup-response').should('contain', 'Nome deve conter apenas caracteres alfabéticos')
+ });
 })
+
+  
+
+
+
+  
+
 
 describe('US-009–Funcionalidade: Buscar filmes', () => {
   it('Deve preencher o campo de busca e acionar a pesquisa', () => {
