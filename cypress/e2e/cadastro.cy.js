@@ -5,6 +5,10 @@ describe('US-012–Funcionalidade: Cadastro de membros', () => {
     cy.visit('/')
   });
 
+  afterEach(() => {
+          cy.screenshot()
+      });
+
   it('Deve fazer o cadastro de campos obrigatórios', () => {
     var email = `fabio${Date.now()}@teste.com`
     cy.preencherCadastro( 'fabio' , 'Araujo', email, '8596352145','Teste@12345'  )
@@ -26,7 +30,7 @@ it('Deve validar mensagem de erro com o campo nome inválido', () => {
 
 describe('US-009–Funcionalidade: Buscar filmes', () => {
   it('Deve preencher o campo de busca e acionar a pesquisa', () => {
-    cy.visit('http://127.0.0.1:8080/')
+    cy.visit('/')
 
     // Verifica se a seção de busca existe
     cy.get('#search-section').should('exist')
@@ -44,7 +48,7 @@ describe('US-009–Funcionalidade: Buscar filmes', () => {
 
 describe('US-015–Funcionalidade: Recomendações de filmes', () => {
   it('Deve exibir recomendações de filmes', () => {
-    cy.visit('http://127.0.0.1:8080/')
+    cy.visit('/')
 
     
 
